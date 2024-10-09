@@ -34,13 +34,74 @@ fn main() {
 
     // Integer Overflow -> Panic!
 
-    let integer_overflow_example: u8 = 255 + integer_overflow();
-    println!("🚀 ~ integer_overflow_example:{}", integer_overflow_example);
+    let integer_overflow_example = match  integer_overflow().checked_add(0){
+        Some(num) => num,
+        None => {
+            println!("cannot read number");
+            return;
+        }
+    } ;
+    //println!("🚀 ~ integer_overflow_example:{}", integer_overflow_example);
+
+
+    // TODO -> Floating number. There are two floating number in RUST
+    // -  f32 -> Take less decimal numbers than f64
+    // -  f64 -> Take more decimal numbers than f64
+
+    let f64 = 2.32323435345245234523521343623456;  // take 16 digit after decimal point
+    let f32:f32 = 2.32323435345245234523521343623456; // take only 7 digit after decimal point
+    println!("This is my f64: {:?}", f64);
+    println!("This is my f32: {:?}", f32);
 
     
 
 
-    //println!("{}", a)
+
+    let x:f32 = 5.0 / 2.0;
+    let x:f32 = 5_f32 / 2_f32;
+    println!("This is my x: {:?}", x);
+
+
+    let c:&str = "jadkfasdfz";
+    let z: char = 'ℤ'; // with explicit type annotation
+    let heart_eyed_cat = '😻';
+
+
+    println!("{:?} {:?} {:?}", c, z, heart_eyed_cat); 
+
+
+    // ________________________TUPLE_______________________________________
+    let tanvir: (&str, i32, bool, f64) = ("Tanvir Hossain", 21, true, 3.5);
+    let (x, y, z, u) =  tanvir;
+
+    println!("{x} {y} {z} {u}");
+    // We can also use this syntax
+    println!("by indexing we can also print tuple {}", tanvir.0);
+    println!("by indexing we can also print tuple {}", tanvir.1);
+    println!("by indexing we can also print tuple {}", tanvir.2);
+    
+    
+    // ________________________TUPLE_______________________________________
+    
+    // ________________________UNIT_______________________________________
+    let unit = ();
+    println!("{:?}", unit); // an empty tuple called unite -> ()
+    // ________________________UNIT_______________________________________
+    
+    
+    // ________________________ARRAY_______________________________________
+    let arr = [5, 30, 32];
+    println!("array's element by index number {}", arr[0]);
+    // ------------------Syntax Sugar------------------
+    let arr: [i32; 5] = [10; 5]; // just like 5 10 in one array [10, 10, 10, 10, 10] 
+
+    println!("array's element by index number {}", arr[4]);
+
+    // ________________________ARRAY_______________________________________
+    
+    
+
+
 }
 
 /*
@@ -69,5 +130,5 @@ u8 -> 8-bit unsigned integer. It can hold values from 0 to 255.
 */
 
 fn integer_overflow() -> u8 {
-    100
+    255
 }
